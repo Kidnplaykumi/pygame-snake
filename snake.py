@@ -70,10 +70,7 @@ def snake_ate_food(snake, food):
     """
     if snake[0] == food:
         return True
-    if True:
-        new_possition = create_food_position()
-    else:
-        return False
+    return False
 
 def snake_ran_out_of_bounds(snake):
     """Returns whether the snake has ran off one of the four edges of the grid.
