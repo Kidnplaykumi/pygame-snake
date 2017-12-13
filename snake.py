@@ -45,12 +45,20 @@ def get_direction(previous_direction, event_key):
     If event_key does not correspond with any of the arrows keys, return previous_direction.
     """
     if event_key == pygame.K_LEFT:
+        if previous_direction == (1, 0):
+            return previous_direction
         return DIRECTION_LEFT
     elif event_key == pygame.K_UP:
+        if previous_direction == (0, 1):
+            return previous_direction
         return DIRECTION_UP
     elif event_key == pygame.K_DOWN:
+        if previous_direction == (0, -1):
+            return previous_direction
         return DIRECTION_DOWN
     elif event_key == pygame.K_RIGHT:
+        if previous_direction == (-1, 0):
+            return previous_direction
         return DIRECTION_RIGHT
     return previous_direction
 
@@ -94,9 +102,9 @@ def snake_intersected_body(snake):
     The snake ran into itself if the position of the head is the same as the position
     of any of its body segments.
     """
-    if snake[0] in snake[1:-1]:
-        return True
-    return False
+    if len(snake) != len(set(snake)):
+        return True 
+    return False
     
 
 def get_score(snake):
@@ -106,7 +114,8 @@ def get_score(snake):
     For example, if the snake has 25 segments, the score is 250.
     """
     score = len(snake) * 10
-    return score
+    return score - 100
+
 
 def get_game_over_text(score):
     """Returns the text to draw on the screen after the game is over.
@@ -121,6 +130,8 @@ def get_snake_speed(snake):
     The speed at the beginning of the game should be 5. Once the snake has eaten 10 pieces of food,
     the speed of the game should increase (by how much is up to you).
     """
+    if len(snake) >= 15:
+        return 10
     return 5
 
 def move_snake(snake, direction, food):
