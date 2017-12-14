@@ -103,8 +103,8 @@ def snake_intersected_body(snake):
     of any of its body segments.
     """
     if len(snake) != len(set(snake)):
-        return True 
-    return False
+        return True
+    return False
     
 
 def get_score(snake):
